@@ -6,7 +6,7 @@ import pages.WYSIWYGPage;
 
 import static org.testng.Assert.assertEquals;
 
-public class FrameTest extends BaseTests {
+public class FrameTests extends BaseTests {
     @Test
     public void testWYSIWYG(){
         WYSIWYGPage wysiwygPage = homePage.clickWYSIWYG();

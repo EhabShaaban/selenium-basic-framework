@@ -6,7 +6,7 @@ import pages.FileUploadPage;
 
 import static org.testng.Assert.assertEquals;
 
-public class FIleUploadTest extends BaseTests {
+public class FIleUploadTests extends BaseTests {
     @Test
     public void testFileUpload(){
         FileUploadPage uploadPage = homePage.clickFileUpload();

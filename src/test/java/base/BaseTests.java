@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTests {
     private WebDriver driver;
     protected HomePage homePage;
@@ -16,15 +18,16 @@ public class BaseTests {
     public void setUp(){
         System.setProperty("webdriver.chrome.driver","resources/chromedriver");
         driver = new ChromeDriver();
-        driver.get(url);
         //driver.manage().window().setSize(new Dimension(375, 812));
+        //driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-
-        homePage = new HomePage(driver);
+        goHome();
     }
     @BeforeMethod
     public void goHome(){
         driver.get(url);
+        homePage = new HomePage(driver);
     }
     @AfterClass
     public void tearDown(){
