@@ -38,6 +38,10 @@ public class HomePage {
         clickLink("File Upload");
         return new FileUploadPage(driver);
     }
+    public WYSIWYGPage clickWYSIWYG(){
+        clickLink("WYSIWYG Editor");
+        return new WYSIWYGPage(driver);
+    }
     public void clickLink(String linkText){
         driver.findElement(By.linkText(linkText)).click();
     }
