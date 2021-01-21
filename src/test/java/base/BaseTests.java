@@ -1,10 +1,12 @@
 package base;
 
 import com.google.common.io.Files;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -33,12 +35,13 @@ public class BaseTests {
         System.setProperty("webdriver.chrome.driver","resources/chromedriver");
         /*driver = new EventFiringWebDriver(new ChromeDriver());
         driver.register(new EventReporter());*/
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(getChromeOptions());
         //driver.manage().window().setSize(new Dimension(375, 812));
         //driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         goHome();
+        setCookie();
     }
     @BeforeMethod
     public void goHome(){
@@ -62,9 +65,21 @@ public class BaseTests {
     public void tearDown(){
         driver.quit();
     }
-
-    //
+    /*
+    * helper methods
+    * */
     public WindowManger getWindowManger(){
         return new WindowManger(driver);
+    }
+    private ChromeOptions getChromeOptions(){
+        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("disable-infobars");
+//        options.setHeadless(true);
+        return options;
+    }
+    private void setCookie(){
+        Cookie cookie = new Cookie.Builder("cookieMachine", "123")
+                .domain("the-internet.herokuapp.com").build();
+        driver.manage().addCookie(cookie);
     }
 }
